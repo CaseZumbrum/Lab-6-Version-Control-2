@@ -23,6 +23,26 @@ def encode(password):
             encoded_password += str(int(char)+3)
     return encoded_password
 
+
+# Decode function
+def decoder(password):
+    list_password = list(password)  # Turns the string into a list
+    for i in range(0, len(list_password)):
+        list_password[i] = int(list_password[i])  # Turns all the items into integers so 3 can be subtracted
+    for i in range(0, len(list_password)):  # Check for special cases
+        if list_password[i] == 0:
+            list_password[i] = 7
+        if list_password[i] == 1:
+            list_password[i] = 8
+        if list_password[i] == 2:
+            list_password[i] = 9
+        else:
+            list_password[i] = int(list_password[i]) - 3 # Subtract 3 if not a special case
+    for i in range(0, len(list_password)):
+        list_password[i] = str(list_password[i])  # Turn the list items back into a string
+
+    return "".join(list_password)  # Combine all the items of the list into one string
+
 '''
 Written by: Case Zumbrum
 '''
@@ -34,7 +54,7 @@ if __name__ == "__main__":
             encoded = encode(password)
             print("Your password has been encoded and stored!\n")
         elif choice == 2:
-            pass
-            #TODO: add decoder function call here
+            decoded = decoder(encoded)
+            print(f"The encoded password is {encoded}, and the original password is {decoded}")
         else:
             exit()
